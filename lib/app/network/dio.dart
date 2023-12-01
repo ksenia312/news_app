@@ -10,6 +10,7 @@ abstract class DioRegister {
     );
 
     instance.interceptors.add(const DioAuthInterceptor());
+    instance.interceptors.add( LogInterceptor());
 
     return instance;
   }

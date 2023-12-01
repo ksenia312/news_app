@@ -10,7 +10,7 @@ class SourceEntity {
   factory SourceEntity.fromJson(Map<String, dynamic> json) {
     return SourceEntity(
       id: json['id'] ?? 'Unnamed',
-      name: json['title'] ?? 'Unnamed',
+      name: json['name'] ?? 'Unnamed',
     );
   }
 }

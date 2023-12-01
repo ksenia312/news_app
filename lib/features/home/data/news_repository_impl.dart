@@ -26,6 +26,7 @@ class NewsRepositoryImpl implements NewsRepository {
       );
       return response;
     } on DioException catch (e) {
+      print(e.message);
       if (e.response?.statusCode == 426) {
         throw NewsCompletedException();
       }

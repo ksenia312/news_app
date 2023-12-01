@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:news_app/app/models/source_entity.dart';
 
-class NewsSearchParams {
+class NewsSearchParams extends Equatable {
   const NewsSearchParams({
     this.key,
-    this.scopes = SearchInScope.values,
+    this.scopes = const [SearchInScope.title],
     this.sources = const [],
     this.sortBy = SortBy.publishedAt,
   });
@@ -15,6 +16,13 @@ class NewsSearchParams {
   final List<SourceEntity> sources;
 
   final SortBy sortBy;
+
+  @override
+  List<Object?> get props => [key, sources, scopes, sortBy];
+
+  bool get isNotEmpty {
+    return key != null || key!.isNotEmpty;
+  }
 
   NewsSearchParams copyWith({
     String? key,
@@ -32,7 +40,7 @@ class NewsSearchParams {
 
   Map<String, dynamic> asMap() {
     return {
-      if (key != null) 'q': key,
+      if (key != null && key!.isNotEmpty) 'q': key,
       'sortBy': sortBy.name,
       'searchIn': scopes.map((e) => e.name).join(','),
       'sources': sources.map((e) => e.id).join(','),

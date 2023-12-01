@@ -4,6 +4,9 @@ import 'package:news_app/app/models/source_entity.dart';
 import 'package:news_app/common/bloc_state_builder.dart';
 import 'package:news_app/features/home/presentation/home_screen.dart';
 import 'package:news_app/features/news_sources/domain/news_sources_store.dart';
+import 'package:news_app/features/uikit/app_bar.dart';
+import 'package:news_app/features/uikit/app_error.dart';
+import 'package:news_app/features/uikit/app_progress.dart';
 
 class SourcesStateBuilder extends BlocIterableStateBuilder<NewsSourcesStore,
     NewsSourcesState, SourceEntity> {
@@ -30,12 +33,8 @@ class SourcesStateBuilder extends BlocIterableStateBuilder<NewsSourcesStore,
   ) {
     if (lastData == null || lastData.isEmpty) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('Loading ...'),
-        ),
-        body: const Center(
-          child: Text('error'),
-        ),
+        appBar: const CustomAppBar(),
+        body: AppError.centered(value: error),
       );
     }
     return dataBuilder(lastData);
@@ -47,12 +46,10 @@ class SourcesStateBuilder extends BlocIterableStateBuilder<NewsSourcesStore,
   ]) {
     if (lastData == null || lastData.isEmpty) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('Loading ...'),
+        appBar: const CustomAppBar(
+          title: Text('Loading ...'),
         ),
-        body: const Center(
-          child: CircularProgressIndicator.adaptive(),
-        ),
+        body: AppProgress.centered(caption: 'Fetching sources..'),
       );
     }
     return dataBuilder(lastData);

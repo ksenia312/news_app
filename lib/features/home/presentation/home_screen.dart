@@ -4,7 +4,8 @@ import 'package:news_app/app/models/async_state.dart';
 import 'package:news_app/app/models/source_entity.dart';
 import 'package:news_app/common/bloc_state_builder.dart';
 import 'package:news_app/features/home/domain/news_cubit.dart';
-import 'package:news_app/features/home/presentation/components/search_panel.dart';
+import 'package:news_app/features/uikit/app_error.dart';
+import 'package:news_app/features/uikit/app_progress.dart';
 
 import 'components/floating_up_button.dart';
 import 'components/home_app_bar.dart';
@@ -45,17 +46,6 @@ class _HomeScreenBody
   final ScrollController scrollController;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const HomeSearchPanel(),
-        Expanded(child: super.build(context)),
-      ],
-    );
-  }
-
-  @override
   AsyncState<Iterable<ArticleEntity>>? asyncStateInjector(NewsState state) {
     return state.articles;
   }
@@ -71,9 +61,7 @@ class _HomeScreenBody
     String error,
   ) {
     if (lastData == null || lastData.isEmpty) {
-      return Center(
-        child: Text(error),
-      );
+      return AppError.centered(value: error);
     }
     return _buildData(lastData);
   }
@@ -83,9 +71,7 @@ class _HomeScreenBody
     Iterable<ArticleEntity>? lastData,
   ]) {
     if (lastData == null || lastData.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator.adaptive(),
-      );
+      return AppProgress.centered(caption: 'Fetching articles..');
     }
     return _buildData(lastData, inProgress: true);
   }

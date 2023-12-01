@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app/app/models/article_entity.dart';
+import 'package:news_app/common/context_extension.dart';
 
 class ArticleListItem extends StatelessWidget {
   const ArticleListItem({super.key, required this.entity});
@@ -14,7 +15,7 @@ class ArticleListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final placeholder = Container(
       height: imageSize,
-      color: Theme.of(context).colorScheme.secondary,
+      color: context.colorScheme.secondary,
     );
     return Material(
       borderRadius: BorderRadius.circular(10),
@@ -53,7 +54,7 @@ class ArticleListItem extends StatelessWidget {
                   children: [
                     Text(
                       entity.title,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      style:context.textTheme.titleLarge?.copyWith(
                             color: Colors.white,
                           ),
                       maxLines: 4,
@@ -66,7 +67,7 @@ class ArticleListItem extends StatelessWidget {
                           ? DateFormat(DateFormat.YEAR_MONTH_DAY)
                               .format(entity.publishedAt!)
                           : 'No date',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      style: context.textTheme.bodyMedium?.copyWith(
                             color: Colors.white,
                           ),
                       maxLines: 2,

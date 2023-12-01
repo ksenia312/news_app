@@ -16,6 +16,8 @@ class NewsCubit extends Cubit<NewsState> {
 
   final NewsRepository repository;
 
+  NewsSearchParams get searchParams => state.searchParams;
+
   Future<void> init({required List<SourceEntity> sources}) async {
     _setUpSources(sources: sources);
     return _fetch();
@@ -25,13 +27,40 @@ class NewsCubit extends Cubit<NewsState> {
     return _fetch(page: state.currentPage + 1);
   }
 
+  Future<void> fetchByKey({required String value}) async {
+    if (value != searchParams.key) {
+      emit(
+        state.copyWith(
+          searchParams: searchParams.copyWith(key: value),
+          articles: AsyncState.nothing(),
+        ),
+      );
+      return _fetch();
+    }
+    return;
+  }
+
+  Future<void> fetchByParams({required NewsSearchParams params}) async {
+    if (params != searchParams) {
+      print(params.sources.map((e) => e.name));
+      emit(
+        state.copyWith(
+          searchParams: params,
+          articles: AsyncState.nothing(),
+        ),
+      );
+      return _fetch();
+    }
+    return;
+  }
+
   void _setUpSources({
     required List<SourceEntity> sources,
   }) {
     emit(
       state.copyWith(
         sources: sources,
-        searchParams: state.searchParams.copyWith(
+        searchParams: searchParams.copyWith(
           sources: sources.isNotEmpty ? [sources.first] : [],
         ),
       ),

@@ -13,9 +13,23 @@ class App extends StatelessWidget {
       create: (context) => getIt<NewsSourcesStore>()..init(),
       child: MaterialApp(
         title: 'News App',
-        theme: ThemeData.from(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            primarySwatch: Colors.blue,
+          ),
+          appBarTheme: const AppBarTheme(
+            elevation: 5,
+            color: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            ),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            border: OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(),
+            contentPadding: EdgeInsets.symmetric(horizontal: 8),
+          ),
         ),
         home: const SourcesStateBuilder(),
       ),
