@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/app/models/article_entity.dart';
-import 'package:news_app/app/models/news_search_params.dart';
 import 'package:news_app/features/home/domain/news_cubit.dart';
 
 import '../components/article_list_item.dart';
@@ -20,10 +19,6 @@ class HomeDataView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchParams = context.select<NewsCubit, NewsSearchParams>(
-      (value) => value.searchParams,
-    );
-
     return NotificationListener<ScrollUpdateNotification>(
       child: Column(
         mainAxisSize: MainAxisSize.min,

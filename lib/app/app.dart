@@ -3,36 +3,49 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/di/setup_dependencies.dart';
 import 'package:news_app/features/news_sources/presentation/sources_state_builder.dart';
 import 'package:news_app/features/news_sources/domain/news_sources_store.dart';
+import 'package:news_app/features/uikit/theme.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<NewsSourcesStore>()..init(),
-      child: MaterialApp(
-        title: 'News App',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(
-            primarySwatch: Colors.blue,
-          ),
-          appBarTheme: const AppBarTheme(
-            elevation: 5,
-            color: Colors.white,
-            iconTheme: IconThemeData(
-              color: Colors.black,
-            ),
-          ),
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(),
-            enabledBorder: OutlineInputBorder(),
-            contentPadding: EdgeInsets.symmetric(horizontal: 8),
-          ),
+    return AppBuilder(
+      builder: (context) {
+        final themeMode = context.select<AppTheme, ThemeMode>(
+          (theme) => theme.mode,
+        );
+        return MaterialApp(
+          title: 'News App',
+          debugShowCheckedModeBanner: false,
+          themeMode: themeMode,
+          theme: AppThemeConfig.lightTheme,
+          darkTheme: AppThemeConfig.darkTheme,
+          home: const SourcesStateBuilder(),
+        );
+      },
+    );
+  }
+}
+
+class AppBuilder extends StatelessWidget {
+  const AppBuilder({super.key, required this.builder});
+
+  final Widget Function(BuildContext) builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<NewsSourcesStore>()..init(),
         ),
-        home: const SourcesStateBuilder(),
-      ),
+        ChangeNotifierProvider(
+          create: (context) => AppTheme.initialized(),
+        ),
+      ],
+      child: Builder(builder: builder),
     );
   }
 }

@@ -6,5 +6,5 @@ Future<void> setupSourcesDependencies() async {
   final repository = SourcesRepositoryImpl(getIt());
   final store = NewsSourcesStore(repository);
 
-  sl.registerSingleton(store);
+  sl.registerFactory(() => store);
 }

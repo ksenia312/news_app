@@ -42,7 +42,6 @@ class NewsCubit extends Cubit<NewsState> {
 
   Future<void> fetchByParams({required NewsSearchParams params}) async {
     if (params != searchParams) {
-      print(params.sources.map((e) => e.name));
       emit(
         state.copyWith(
           searchParams: params,
@@ -61,7 +60,7 @@ class NewsCubit extends Cubit<NewsState> {
       state.copyWith(
         sources: sources,
         searchParams: searchParams.copyWith(
-          sources: sources.isNotEmpty ? [sources.first] : [],
+          sources: NewsSearchParams.defaultSourceFrom(sources),
         ),
       ),
     );

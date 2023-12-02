@@ -15,6 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: title,
+      toolbarHeight: height,
       titleTextStyle: context.appBarTheme.titleTextStyle?.copyWith(
         color: context.colorScheme.background,
       ),

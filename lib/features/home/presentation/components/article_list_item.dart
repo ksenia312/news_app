@@ -7,7 +7,7 @@ import 'package:news_app/common/context_extension.dart';
 class ArticleListItem extends StatelessWidget {
   const ArticleListItem({super.key, required this.entity});
 
-  static const imageSize = 200.0;
+  static const imageSize = 210.0;
 
   final ArticleEntity entity;
 
@@ -54,9 +54,9 @@ class ArticleListItem extends StatelessWidget {
                   children: [
                     Text(
                       entity.title,
-                      style:context.textTheme.titleLarge?.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: context.textTheme.titleLarge?.copyWith(
+                        color: Colors.white,
+                      ),
                       maxLines: 4,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
@@ -68,8 +68,8 @@ class ArticleListItem extends StatelessWidget {
                               .format(entity.publishedAt!)
                           : 'No date',
                       style: context.textTheme.bodyMedium?.copyWith(
-                            color: Colors.white,
-                          ),
+                        color: Colors.white,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

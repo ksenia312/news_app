@@ -4,10 +4,18 @@ import 'package:news_app/app/models/source_entity.dart';
 class NewsSearchParams extends Equatable {
   const NewsSearchParams({
     this.key,
-    this.scopes = const [SearchInScope.title],
+    this.scopes = defaultScopes,
+    this.sortBy = defaultSortBy,
     this.sources = const [],
-    this.sortBy = SortBy.publishedAt,
   });
+
+  static const defaultScopes = [SearchInScope.title];
+  static const defaultSortBy = SortBy.relevancy;
+
+  static List<SourceEntity>? defaultSourceFrom(
+    List<SourceEntity> availableSources,
+  ) =>
+      availableSources.isNotEmpty ? [availableSources.first] : null;
 
   final String? key;
 
@@ -50,4 +58,12 @@ class NewsSearchParams extends Equatable {
 
 enum SearchInScope { title, description, content }
 
-enum SortBy { relevancy, popularity, publishedAt }
+enum SortBy {
+  relevancy('Relevance'),
+  popularity('Popularity'),
+  publishedAt('Published at');
+
+  const SortBy(this.title);
+
+  final String title;
+}

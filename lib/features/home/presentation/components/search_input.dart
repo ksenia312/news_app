@@ -29,6 +29,7 @@ class _HomeSearchInputState extends State<HomeSearchInput> {
       maxLines: 1,
       onSubmitted: _search,
       decoration: InputDecoration(
+        hintText: 'Search',
         border: const OutlineInputBorder(),
         enabledBorder: const OutlineInputBorder(),
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
