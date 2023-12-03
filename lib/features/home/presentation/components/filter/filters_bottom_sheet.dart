@@ -56,18 +56,16 @@ class _FiltersBottomSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton(
+                AppElevatedTextButton(
                   onPressed:
                       model.hasChanges ? () => _submit(context, model) : null,
-                  child: const Text('Submit'),
+                  value: 'Submit',
                 ),
-                ElevatedButton(
+                const SizedBox(height: 4),
+                AppElevatedTextButton(
+                  inverse: true,
                   onPressed: context.navigator.pop,
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: context.colorScheme.primary,
-                    backgroundColor: context.colorScheme.surface,
-                  ),
-                  child: const Text('Cancel'),
+                  value: 'Cancel',
                 ),
                 spacer,
               ],
