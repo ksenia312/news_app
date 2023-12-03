@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/uikit/app_icons.dart';
 
 class FloatingUpButton extends StatefulWidget {
   const FloatingUpButton({super.key, required this.scrollController});
@@ -25,7 +26,7 @@ class _FloatingUpButtonState extends State<FloatingUpButton> {
       return widget.scrollController.offset > 100
           ? FloatingActionButton(
               onPressed: _scrollUp,
-              child: const Icon(Icons.arrow_upward),
+              child: Icon(AppIcons.arrowUp),
             )
           : const SizedBox.shrink();
     } catch (_) {

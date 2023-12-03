@@ -19,7 +19,7 @@ class ArticleListItem extends StatelessWidget {
     return Material(
       borderRadius: _radius,
       elevation: 2,
-      color: Colors.black,
+      color: context.colorScheme.surface,
       child: InkWell(
         borderRadius: _radius,
         onTap: () => _onTap(context),
@@ -67,11 +67,13 @@ class ArticleListItem extends StatelessWidget {
         ? Hero(
             tag: AppHeroTags.articleImage.tagBy('${entity.id}'),
             child: Opacity(
-              opacity: 0.5,
+              opacity: 1.0,
               child: AppImage(
                 url: entity.imageUrl!,
                 imageHeight: _imageHeight,
                 imageWidth: _imageWidth,
+                color: Colors.black45,
+                colorBlendMode: BlendMode.darken,
               ),
             ),
           )
@@ -83,17 +85,14 @@ class ArticleListItem extends StatelessWidget {
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Hero(
-      tag: AppHeroTags.articleTitle.tagBy('${entity.id}'),
-      child: Text(
-        entity.title,
-        style: context.textTheme.titleLarge?.copyWith(
-          color: Colors.white,
-        ),
-        maxLines: 4,
-        overflow: TextOverflow.ellipsis,
-        textAlign: TextAlign.center,
+    return Text(
+      entity.title,
+      style: context.textTheme.titleLarge?.copyWith(
+        color: Colors.white,
       ),
+      maxLines: 4,
+      overflow: TextOverflow.ellipsis,
+      textAlign: TextAlign.center,
     );
   }
 

@@ -1,5 +1,4 @@
 enum AppHeroTags {
-  articleTitle,
   articleImage;
 
   String tagBy(String value) {

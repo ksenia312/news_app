@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class AppThemeConfig {
-  static const appBarTheme = AppBarTheme(elevation: 5);
+  static const appBarTheme = AppBarTheme(elevation: 2);
 
   static const inputDecorationTheme = InputDecorationTheme(
     border: OutlineInputBorder(),
@@ -14,6 +14,7 @@ abstract class AppThemeConfig {
           primarySwatch: Colors.blue,
           brightness: Brightness.light,
         ),
+        splashColor: const Color(0xff0d4b80),
         appBarTheme: appBarTheme.copyWith(
           color: Colors.white,
           iconTheme: const IconThemeData(
@@ -29,6 +30,7 @@ abstract class AppThemeConfig {
           accentColor: Colors.lightBlueAccent,
           brightness: Brightness.dark,
         ),
+        splashColor: const Color(0xff444446),
         appBarTheme: appBarTheme,
         inputDecorationTheme: inputDecorationTheme,
       );

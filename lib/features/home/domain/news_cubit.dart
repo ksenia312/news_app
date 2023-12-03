@@ -31,6 +31,7 @@ class NewsCubit extends Cubit<NewsState> {
     if (value != searchParams.key) {
       emit(
         state.copyWith(
+          isCompleted: false,
           searchParams: searchParams.copyWith(key: value),
           articles: AsyncState.nothing(),
         ),
@@ -44,6 +45,7 @@ class NewsCubit extends Cubit<NewsState> {
     if (params != searchParams) {
       emit(
         state.copyWith(
+          isCompleted: false,
           searchParams: params,
           articles: AsyncState.nothing(),
         ),

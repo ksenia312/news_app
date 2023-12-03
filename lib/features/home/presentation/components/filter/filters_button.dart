@@ -7,6 +7,7 @@ import 'package:news_app/features/home/domain/news_cubit.dart';
 import 'package:news_app/features/home/domain/search_params_editing_model.dart';
 import 'package:news_app/uikit/app_bottom_sheet.dart';
 import 'package:news_app/uikit/app_icon_button.dart';
+import 'package:news_app/uikit/app_icons.dart';
 import 'package:news_app/uikit/app_toast.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,7 @@ class FiltersButton extends StatelessWidget {
     return BottomSheetControllerBuilder(
       builder: (context, controller) {
         return AppIconButton(
-          icon: const Icon(Icons.tune),
+          icon: Icon(AppIcons.settings),
           onPressed: () => _showFilters(context, controller),
         );
       },

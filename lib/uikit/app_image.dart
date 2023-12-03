@@ -9,6 +9,9 @@ class AppImage extends StatelessWidget {
     this.placeholder,
     this.imageHeight,
     this.imageWidth,
+    this.radius = 10,
+    this.color,
+    this.colorBlendMode,
   });
 
   static Widget placeholderOf(
@@ -19,13 +22,16 @@ class AppImage extends StatelessWidget {
       Container(
         height: height,
         width: width,
-        color: context.colorScheme.secondary,
+        color: context.themeData.splashColor,
       );
 
   final double? imageHeight;
   final double? imageWidth;
   final String url;
   final Widget? placeholder;
+  final double radius;
+  final Color? color;
+  final BlendMode? colorBlendMode;
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +40,20 @@ class AppImage extends StatelessWidget {
       height: imageHeight,
       width: imageWidth,
     );
-    return CachedNetworkImage(
-      imageUrl: url,
-      width: imageWidth,
-      height: imageHeight,
-      alignment: Alignment.topCenter,
-      fadeInCurve: Curves.easeInOutQuad,
-      fit: BoxFit.cover,
-      errorWidget: (_, __, ___) => placeholder ?? defaultPlaceholder,
-      placeholder: (_, __) => placeholder ?? defaultPlaceholder,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: CachedNetworkImage(
+        imageUrl: url,
+        width: imageWidth,
+        height: imageHeight,
+        alignment: Alignment.topCenter,
+        fadeInCurve: Curves.easeInOutQuad,
+        fit: BoxFit.cover,
+        color: color,
+        colorBlendMode: colorBlendMode,
+        errorWidget: (_, __, ___) => placeholder ?? defaultPlaceholder,
+        placeholder: (_, __) => placeholder ?? defaultPlaceholder,
+      ),
     );
   }
 }

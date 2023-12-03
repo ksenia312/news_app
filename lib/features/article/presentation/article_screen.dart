@@ -48,12 +48,9 @@ class ArticleScreen extends StatelessWidget {
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Hero(
-      tag: AppHeroTags.articleTitle.tagBy('${entity.id}'),
-      child: Text(
-        entity.title,
-        style: context.textTheme.titleLarge,
-      ),
+    return Text(
+      entity.title,
+      style: context.textTheme.titleLarge,
     );
   }
 
@@ -72,12 +69,9 @@ class ArticleScreen extends StatelessWidget {
           )
         : const SizedBox.shrink();
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(10),
-      child: LimitedBox(
-        maxHeight: _imageHeight,
-        child: child,
-      ),
+    return LimitedBox(
+      maxHeight: _imageHeight,
+      child: child,
     );
   }
 
