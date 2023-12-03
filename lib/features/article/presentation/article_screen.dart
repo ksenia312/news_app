@@ -3,6 +3,7 @@ import 'package:news_app/app/models/article_entity.dart';
 import 'package:news_app/common/extensions/context_extension.dart';
 import 'package:news_app/common/utils/hero_tags.dart';
 import 'package:news_app/uikit/app_bar.dart';
+import 'package:news_app/uikit/app_elevated_text_button.dart';
 import 'package:news_app/uikit/app_image.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -90,9 +91,9 @@ class ArticleScreen extends StatelessWidget {
   }
 
   Widget _buildButton(BuildContext context) {
-    return ElevatedButton(
+    return AppElevatedTextButton(
       onPressed: _onViewButtonPressed,
-      child: const Text('View full article'),
+      value: 'View full article',
     );
   }
 
