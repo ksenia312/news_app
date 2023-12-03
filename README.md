@@ -11,10 +11,10 @@ Contains information about the news and a link to the source.
 
 ### Technical highlights
  - Uses BloC and ChangeNotifier for State Management.
- - Stores accesses in env file.
+ - Stores env variables in the `.env` file.
  - Uses custom errors for Error Handling.
- - Has a small Uikit for basic application components.
+ - Has a small UIkit for basic application components.
  - Dark and light theme, saved between sessions using SharedPreferences.
 
 To run, use `tool/run.sh`. It picks variables from the `.env` and runs the application.
-But find the `.env` file first)
+But create the `.env` file first
