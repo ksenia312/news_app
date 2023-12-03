@@ -33,7 +33,10 @@ class AppElevatedTextButton extends StatelessWidget {
               foregroundColor: context.colorScheme.primary,
               backgroundColor: context.colorScheme.surface,
             )
-          : null,
+          : ElevatedButton.styleFrom(
+              foregroundColor: context.colorScheme.surface,
+              backgroundColor: context.colorScheme.primary,
+            ),
       child: Text(value),
     );
   }

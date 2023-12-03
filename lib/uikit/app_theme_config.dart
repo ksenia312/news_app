@@ -10,6 +10,7 @@ abstract class AppThemeConfig {
   );
 
   static ThemeData get lightTheme => ThemeData(
+        useMaterial3: true,
         colorScheme: const ColorScheme.light(
           primary: Colors.blue,
           brightness: Brightness.light,
@@ -25,6 +26,7 @@ abstract class AppThemeConfig {
       );
 
   static ThemeData get darkTheme => ThemeData(
+        useMaterial3: true,
         colorScheme: const ColorScheme.dark(
           primary: Colors.blue,
           secondary: Colors.lightBlueAccent,

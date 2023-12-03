@@ -1,4 +1,8 @@
-## v1.0.1
+## v1.0.3
+
+- **FIX**: Material button styles
+
+## v1.0.2
 
  - **FIX**: Github action env
 

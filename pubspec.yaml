@@ -1,7 +1,7 @@
 name: news_app
 description: A new Flutter project with News
 publish_to: 'none'
-version: 1.0.2
+version: 1.0.3
 
 environment:
   sdk: '>=3.0.6 <4.0.0'
