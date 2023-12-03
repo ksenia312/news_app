@@ -1,24 +1,5 @@
 import 'package:flutter/material.dart';
 
-class AppTheme extends ChangeNotifier {
-  AppTheme.initialized() {
-    init();
-  }
-
-  late ThemeMode mode;
-
-  bool get isLight => mode == ThemeMode.light;
-
-  void init() {
-    mode = ThemeMode.light;
-  }
-
-  void toggle() {
-    mode = isLight ? ThemeMode.dark : ThemeMode.light;
-    notifyListeners();
-  }
-}
-
 abstract class AppThemeConfig {
   static const appBarTheme = AppBarTheme(elevation: 5);
 

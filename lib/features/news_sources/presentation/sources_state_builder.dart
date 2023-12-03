@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:news_app/app/models/async_state.dart';
 import 'package:news_app/app/models/source_entity.dart';
 import 'package:news_app/common/bloc_state_builder.dart';
-import 'package:news_app/features/home/presentation/home_screen.dart';
 import 'package:news_app/features/news_sources/domain/news_sources_store.dart';
-import 'package:news_app/features/uikit/app_bar.dart';
-import 'package:news_app/features/uikit/app_error.dart';
-import 'package:news_app/features/uikit/app_progress.dart';
+import 'package:news_app/uikit/app_bar.dart';
+import 'package:news_app/uikit/app_error.dart';
+import 'package:news_app/uikit/app_progress.dart';
 
 class SourcesStateBuilder extends BlocIterableStateBuilder<NewsSourcesStore,
     NewsSourcesState, SourceEntity> {
-  const SourcesStateBuilder({super.key});
+  const SourcesStateBuilder({
+    super.key,
+    required this.builder,
+  });
+
+  final Widget Function(Iterable<SourceEntity>) builder;
 
   @override
   AsyncState<Iterable<SourceEntity>>? asyncStateInjector(
@@ -22,9 +26,8 @@ class SourcesStateBuilder extends BlocIterableStateBuilder<NewsSourcesStore,
   @override
   Widget dataBuilder(
     Iterable<SourceEntity> data,
-  ) {
-    return HomeScreen(sources: [...data]);
-  }
+  ) =>
+      builder(data);
 
   @override
   Widget errorBuilder(

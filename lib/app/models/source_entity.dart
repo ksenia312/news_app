@@ -1,16 +1,17 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'source_entity.g.dart';
+
+@JsonSerializable(createToJson: false)
 class SourceEntity {
   const SourceEntity({
     required this.id,
     required this.name,
   });
 
+  factory SourceEntity.fromJson(Map<String, dynamic> json) =>
+      _$SourceEntityFromJson(json);
+
   final String id;
   final String name;
-
-  factory SourceEntity.fromJson(Map<String, dynamic> json) {
-    return SourceEntity(
-      id: json['id'] ?? 'Unnamed',
-      name: json['name'] ?? 'Unnamed',
-    );
-  }
 }

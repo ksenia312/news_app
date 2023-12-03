@@ -44,6 +44,7 @@ app.*.map.json
 /android/app/release
 
 **.freezed.*
+**.g.*
 .env
 
 pubspec.lock

@@ -4,24 +4,38 @@ import 'package:news_app/app/models/async_state.dart';
 import 'package:news_app/app/models/source_entity.dart';
 import 'package:news_app/common/bloc_state_builder.dart';
 import 'package:news_app/features/home/domain/news_cubit.dart';
-import 'package:news_app/features/uikit/app_error.dart';
-import 'package:news_app/features/uikit/app_progress.dart';
+import 'package:news_app/features/news_sources/presentation/sources_state_builder.dart';
+import 'package:news_app/uikit/app_error.dart';
+import 'package:news_app/uikit/app_progress.dart';
 
 import 'components/floating_up_button.dart';
 import 'components/home_app_bar.dart';
 import 'view/home_data_view.dart';
 import 'wrapper/home_wrapper.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.sources});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SourcesStateBuilder(
+      builder: (data) {
+        return HomeSourcesScreen(sources: [...data]);
+      },
+    );
+  }
+}
+
+class HomeSourcesScreen extends StatefulWidget {
+  const HomeSourcesScreen({super.key, required this.sources});
 
   final List<SourceEntity> sources;
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeSourcesScreen> createState() => _HomeSourcesScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeSourcesScreenState extends State<HomeSourcesScreen> {
   final scrollController = ScrollController();
 
   @override

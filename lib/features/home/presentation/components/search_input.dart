@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/features/home/domain/news_cubit.dart';
-import 'package:news_app/features/uikit/app_icon_button.dart';
+import 'package:news_app/uikit/app_icon_button.dart';
 import 'package:provider/provider.dart';
 
 class HomeSearchInput extends StatefulWidget {

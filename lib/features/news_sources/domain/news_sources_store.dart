@@ -12,6 +12,9 @@ class NewsSourcesStore extends Cubit<NewsSourcesState> {
   final SourcesRepository repository;
 
   Future<void> init() async {
+    if (state.sources?.hasData ?? false) return;
+    if (state.sources?.inProgress ?? false) return;
+
     emit(state.copyWith(sources: AsyncState.progress()));
     try {
       final res = await repository.fetch();

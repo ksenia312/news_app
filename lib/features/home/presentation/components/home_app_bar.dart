@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/app/models/news_search_params.dart';
 import 'package:news_app/features/home/domain/news_cubit.dart';
-import 'package:news_app/features/uikit/app_bar.dart';
-import 'package:news_app/features/uikit/app_icon_button.dart';
-import 'package:news_app/features/uikit/theme.dart';
+import 'package:news_app/uikit/app_bar.dart';
+import 'package:news_app/uikit/app_icon_button.dart';
+import 'package:news_app/features/view_settings/presentation/theme_toggle_button.dart';
 import 'package:provider/provider.dart';
 
 import 'filters_bottom_sheet.dart';
@@ -26,16 +26,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.tune),
           onPressed: () => _showFilters(context),
         ),
-        Consumer<AppTheme>(
-          builder: (context, appTheme, _) {
-            return AppIconButton(
-              icon: Icon(
-                appTheme.isLight ? Icons.nightlight_outlined : Icons.nightlight,
-              ),
-              onPressed: appTheme.toggle,
-            );
-          },
-        ),
+        const ThemeToggleButton(),
       ],
     );
   }
