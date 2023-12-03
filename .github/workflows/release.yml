@@ -1,0 +1,40 @@
+
+on:
+  push:
+    tags:
+      - release-v*
+
+name: Release App
+jobs:
+  build:
+    name: Release App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Export Release Timestamp
+        run: echo "APP_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v1
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '15'
+          distribution: 'adopt'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+
+      - name: Install pub dependencies
+        run: flutter pub get
+
+      - name: Build Android App
+        run: flutter build apk --split-per-abi --dart-define=NEWS_API_KEY=${{ secrets.NEWS_API_KEY }} --dart-define=NEWS_BASE_URL=${{ secrets.NEWS_BASE_URL }}
+
+      - name: Release App
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ env.APP_VERSION }}
+          name: ${{ env.APP_VERSION }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: 'build/app/outputs/apk/release/*.apk'
