@@ -27,12 +27,12 @@ class NewsCubit extends Cubit<NewsState> {
     return _fetch(page: state.currentPage + 1);
   }
 
-  Future<void> fetchByKey({required String value}) async {
-    if (value != searchParams.key) {
+  Future<void> fetchByKey({required String key}) async {
+    if (key != searchParams.key) {
       emit(
         state.copyWith(
           isCompleted: false,
-          searchParams: searchParams.copyWith(key: value),
+          searchParams: searchParams.copyWith(key: key),
           articles: AsyncState.nothing(),
         ),
       );
@@ -85,22 +85,22 @@ class NewsCubit extends Cubit<NewsState> {
         ),
       ),
     );
-    searchParams ??= state.searchParams;
-    page ??= state.currentPage;
-    pageCount ??= state.pageCount;
+    final requireSearchParams = searchParams ?? state.searchParams;
+    final requirePage = page ?? state.currentPage;
+    final requirePageCount = pageCount ?? state.pageCount;
 
     try {
       final data = await repository.fetch(
-        count: pageCount,
-        page: page,
-        searchParams: searchParams,
+        count: requirePageCount,
+        page: requirePage,
+        searchParams: requireSearchParams,
       );
       emit(
         state.copyWith(
           articles: AsyncState.data([...?state.articles?.data, ...data]),
-          searchParams: searchParams,
-          currentPage: page,
-          pageCount: pageCount,
+          searchParams: requireSearchParams,
+          currentPage: requirePage,
+          pageCount: requirePageCount,
         ),
       );
     } on NewsCompletedException catch (_) {
@@ -121,13 +121,10 @@ class NewsCubit extends Cubit<NewsState> {
           ),
         ),
       );
-    } on Object catch (_) {
+    } catch (_) {
       emit(
         state.copyWith(
-          articles: AsyncState.error(
-            error: 'Something went wrong',
-            lastData: state.articles?.data,
-          ),
+          articles: AsyncState.error(lastData: state.articles?.data),
         ),
       );
     }

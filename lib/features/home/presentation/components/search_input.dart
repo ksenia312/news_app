@@ -43,9 +43,7 @@ class _HomeSearchInputState extends State<HomeSearchInput> {
   Widget _buildPrefixIcon() {
     return AppIconButton(
       icon: Icon(AppIcons.search),
-      onPressed: () {
-        _search(_controller.value.text);
-      },
+      onPressed: () => _search(_controller.value.text),
     );
   }
 
@@ -55,7 +53,7 @@ class _HomeSearchInputState extends State<HomeSearchInput> {
       builder: (context, value, _) {
         if (value.text.isNotEmpty) {
           return AppIconButton(
-            icon: const Icon(Icons.clear),
+            icon: Icon(AppIcons.clear),
             onPressed: _onSuffixPressed,
           );
         }
@@ -73,6 +71,6 @@ class _HomeSearchInputState extends State<HomeSearchInput> {
 
   void _search([String? value]) {
     _focusNode.unfocus();
-    context.read<NewsCubit>().fetchByKey(value: value ?? '');
+    context.read<NewsCubit>().fetchByKey(key: value ?? '');
   }
 }

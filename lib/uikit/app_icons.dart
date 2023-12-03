@@ -40,4 +40,11 @@ class AppIcons {
     }
     return Icons.arrow_upward;
   }
+
+  static IconData get clear {
+    if (Platform.isIOS) {
+      return CupertinoIcons.clear;
+    }
+    return Icons.clear;
+  }
 }
