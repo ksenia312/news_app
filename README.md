@@ -1,16 +1,20 @@
-# news_app
+## Application for viewing news from different sources. 
+Loads news using the API https://newsapi.org/.
 
-A new Flutter project with News.
+### Screens
+ 1. All articles screen.
+Contains a list of all news cards and how to filter them. 
+Has a search bar and filter function to specify the search.
 
-## Getting Started
+ 2. Article screen.
+Contains information about the news and a link to the source.
 
-This project is a starting point for a Flutter application.
+### Technical highlights
+ - Uses BloC and ChangeNotifier for State Management.
+ - Stores accesses in env file.
+ - Uses custom errors for Error Handling.
+ - Has a small Uikit for basic application components.
+ - Dark and light theme, saved between sessions using SharedPreferences.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To run, use `tool/run.sh`. It picks variables from the `.env` and runs the application.
+But find the .env file first)
