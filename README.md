@@ -17,4 +17,4 @@ Contains information about the news and a link to the source.
  - Dark and light theme, saved between sessions using SharedPreferences.
 
 To run, use `tool/run.sh`. It picks variables from the `.env` and runs the application.
-But find the .env file first)
+But find the `.env` file first)
