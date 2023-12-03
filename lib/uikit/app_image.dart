@@ -22,7 +22,7 @@ class AppImage extends StatelessWidget {
       Container(
         height: height,
         width: width,
-        color: context.themeData.splashColor,
+        color: context.colorScheme.tertiary,
       );
 
   final double? imageHeight;

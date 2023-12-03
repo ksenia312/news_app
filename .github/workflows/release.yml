@@ -10,11 +10,11 @@ jobs:
     name: Release App
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Export Release Timestamp
         run: echo "APP_VERSION=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_ENV
-
-      - name: Checkout repository
-        uses: actions/checkout@v1
 
       - name: Set up Java
         uses: actions/setup-java@v2
