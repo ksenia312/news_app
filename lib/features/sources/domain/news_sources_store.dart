@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:news_app/app/models/async_state.dart';
 import 'package:news_app/app/models/source_entity.dart';
-import 'package:news_app/features/news_sources/domain/interface/sources_repository.dart';
+import 'package:news_app/features/sources/domain/interface/sources_repository.dart';
 
 part 'news_sources_store.freezed.dart';
 

@@ -56,12 +56,20 @@ class NewsSearchParams extends Equatable {
   }
 }
 
-enum SearchInScope { title, description, content }
+enum SearchInScope {
+  title,
+  description,
+  content;
+
+  static const fieldKey = 'scope';
+}
 
 enum SortBy {
   relevancy('Relevance'),
   popularity('Popularity'),
   publishedAt('Published at');
+
+  static const fieldKey = 'sortBy';
 
   const SortBy(this.title);
 

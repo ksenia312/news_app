@@ -27,11 +27,11 @@ class NewsRepositoryImpl implements NewsRepository {
       return response;
     } on DioException catch (e) {
       if (e.response?.statusCode == 426) {
-        throw NewsCompletedException();
+        throw const NewsCompletedException();
       }
-      throw NewsFetchException();
+      throw const NewsFetchException();
     } catch (e) {
-      throw NewsFetchException();
+      throw const NewsFetchException();
     }
   }
 }

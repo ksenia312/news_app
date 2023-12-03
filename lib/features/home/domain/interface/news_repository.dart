@@ -10,11 +10,11 @@ abstract class NewsRepository {
 }
 
 class NewsFetchException implements Exception {
-  NewsFetchException({this.message = 'Failed to fetch news'});
+  const NewsFetchException({this.message = 'Failed to fetch news'});
 
   final String message;
 }
 
 class NewsCompletedException implements Exception {
-  NewsCompletedException();
+  const NewsCompletedException();
 }

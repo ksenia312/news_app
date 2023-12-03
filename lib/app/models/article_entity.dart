@@ -1,4 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
+import 'package:news_app/common/utils/random.dart';
+import 'package:news_app/di/setup_dependencies.dart';
 
 part 'article_entity.g.dart';
 
@@ -12,11 +15,12 @@ class ArticleEntity {
     required this.content,
     this.imageUrl,
     this.publishedAt,
-  });
+  }) : id = getIt<AppRandom>().getInt();
 
   factory ArticleEntity.fromJson(Map<String, dynamic> json) =>
       _$ArticleEntityFromJson(json);
 
+  final int id;
   @JsonKey(defaultValue: _ArticleEmptyField.title)
   final String title;
   @JsonKey(defaultValue: _ArticleEmptyField.author)
@@ -30,6 +34,10 @@ class ArticleEntity {
   final DateTime? publishedAt;
   @JsonKey(defaultValue: _ArticleEmptyField.content)
   final String content;
+
+  String get formattedDate => publishedAt != null
+      ? DateFormat(DateFormat.YEAR_MONTH_DAY).format(publishedAt!)
+      : 'No date';
 }
 
 class _ArticleEmptyField {

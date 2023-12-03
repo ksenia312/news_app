@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/common/context_extension.dart';
+import 'package:news_app/common/extensions/context_extension.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key, this.title});
 
   static const height = kToolbarHeight + 10;
 
-  final Widget? title;
+  final String? title;
 
   @override
   Size get preferredSize => const Size.fromHeight(height);
@@ -14,11 +14,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: title,
+      title: title != null ? Text(title!) : null,
       toolbarHeight: height,
-      titleTextStyle: context.appBarTheme.titleTextStyle?.copyWith(
-        color: context.colorScheme.background,
-      ),
+      titleTextStyle: context.textTheme.titleLarge,
     );
   }
 }

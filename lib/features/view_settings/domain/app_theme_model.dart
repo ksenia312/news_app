@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/common/enum_extension.dart';
+import 'package:news_app/common/extensions/enum_extension.dart';
 
 import 'interface/theme_repository.dart';
 

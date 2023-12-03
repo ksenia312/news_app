@@ -12,6 +12,8 @@ class SourceEntity {
   factory SourceEntity.fromJson(Map<String, dynamic> json) =>
       _$SourceEntityFromJson(json);
 
+  static const fieldKey = 'source';
+
   final String id;
   final String name;
 }

@@ -28,7 +28,7 @@ class HomeDataView extends StatelessWidget {
               controller: scrollController,
               shrinkWrap: true,
               itemCount: articles.length,
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),

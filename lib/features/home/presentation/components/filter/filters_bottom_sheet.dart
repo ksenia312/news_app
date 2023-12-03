@@ -1,14 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:news_app/app/models/news_search_params.dart';
-import 'package:news_app/app/models/source_entity.dart';
-import 'package:news_app/common/context_extension.dart';
-import 'package:news_app/common/string_extension.dart';
-import 'package:news_app/features/home/domain/search_params_editing_model.dart';
-import 'package:provider/provider.dart';
+part of 'filters_button.dart';
 
-class FiltersBottomSheet extends StatelessWidget {
-  const FiltersBottomSheet({
-    super.key,
+class _FiltersBottomSheet extends StatelessWidget {
+  const _FiltersBottomSheet({
     required this.initialParams,
     required this.availableSources,
   });
@@ -16,33 +9,10 @@ class FiltersBottomSheet extends StatelessWidget {
   final NewsSearchParams initialParams;
   final List<SourceEntity> availableSources;
 
-  static Future<NewsSearchParams?> show(
-    BuildContext context, {
-    required NewsSearchParams initialParams,
-    required List<SourceEntity> availableSources,
-  }) {
-    return showModalBottomSheet<NewsSearchParams?>(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.sizeOf(context).height - 50,
-      ),
-      builder: (context) {
-        return _BottomSheetWrapper(
-          child: FiltersBottomSheet(
-            initialParams: initialParams,
-            availableSources: availableSources,
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ChangeNotifierProvider(
         create: (context) => SearchParamsEditingModel(
           initialParams,
@@ -53,6 +23,7 @@ class FiltersBottomSheet extends StatelessWidget {
             const spacer = SizedBox(height: 16);
             return Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Align(
                   alignment: Alignment.centerRight,
@@ -85,35 +56,35 @@ class FiltersBottomSheet extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        onPressed: context.navigator.pop,
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: context.colorScheme.primary,
-                          backgroundColor: context.colorScheme.surface,
-                        ),
-                        child: const Text('Cancel'),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: ElevatedButton(
-                        child: const Text('Submit'),
-                        onPressed: () {
-                          context.navigator.pop(model.params);
-                        },
-                      ),
-                    ),
-                  ],
-                )
+                ElevatedButton(
+                  onPressed:
+                      model.hasChanges ? () => _submit(context, model) : null,
+                  child: const Text('Submit'),
+                ),
+                ElevatedButton(
+                  onPressed: context.navigator.pop,
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: context.colorScheme.primary,
+                    backgroundColor: context.colorScheme.surface,
+                  ),
+                  child: const Text('Cancel'),
+                ),
+                spacer,
               ],
             );
           },
         ),
       ),
     );
+  }
+
+  void _submit(BuildContext context, SearchParamsEditingModel model) {
+    final error = model.validate();
+    if (error == null) {
+      context.navigator.pop(model.params);
+    } else {
+      AppToast.showError(context, message: error);
+    }
   }
 
   Widget _buildTitle(BuildContext context, String title) {
@@ -184,22 +155,6 @@ class FiltersBottomSheet extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-class _BottomSheetWrapper extends StatelessWidget {
-  const _BottomSheetWrapper({required this.child});
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomSheet(
-      onClosing: context.navigator.pop,
-      builder: (context) {
-        return child;
-      },
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:news_app/app/models/source_entity.dart';
 import 'package:news_app/app/network/api/news_api.dart';
-import 'package:news_app/features/news_sources/domain/interface/sources_repository.dart';
+import 'package:news_app/features/sources/domain/interface/sources_repository.dart';
 
 class SourcesRepositoryImpl implements SourcesRepository {
   SourcesRepositoryImpl(this.newsApi);

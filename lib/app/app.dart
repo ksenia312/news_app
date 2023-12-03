@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/di/setup_dependencies.dart';
 import 'package:news_app/features/home/presentation/home_screen.dart';
-import 'package:news_app/features/news_sources/domain/news_sources_store.dart';
+import 'package:news_app/features/sources/domain/news_sources_store.dart';
 import 'package:news_app/uikit/app_theme_config.dart';
 import 'package:news_app/features/view_settings/domain/app_theme_model.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +23,7 @@ class App extends StatelessWidget {
           themeMode: themeMode,
           theme: AppThemeConfig.lightTheme,
           darkTheme: AppThemeConfig.darkTheme,
-          routes: {
-            '/': (context) => const HomeScreen(),
-          },
+          home: const HomeScreen(),
         );
       },
     );

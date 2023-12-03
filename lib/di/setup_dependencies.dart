@@ -2,10 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:news_app/app/network/api/news_api.dart';
 import 'package:news_app/app/network/dio.dart';
+import 'package:news_app/common/utils/random.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../features/home/di/setup_dependencies.dart';
-import '../features/news_sources/di/setup_dependencies.dart';
+import '../features/sources/di/setup_dependencies.dart';
 import '../features/view_settings/di/setup_dependencies.dart';
 
 final sl = GetIt.instance;
@@ -19,6 +20,9 @@ Future<void> setupDependencies() async {
 
   final api = NewsApi(dio);
   sl.registerLazySingleton<NewsApi>(() => api);
+
+  final random = AppRandom();
+  sl.registerLazySingleton<AppRandom>(() => random);
 
   await setupThemeDependencies();
   await setupSourcesDependencies();
