@@ -13,6 +13,7 @@ class AppToast {
       context,
       message: message,
       color: context.colorScheme.primary,
+      foregroundColor: context.colorScheme.onPrimary,
       leading: const Icon(Icons.done_outline),
     );
   }
@@ -21,23 +22,26 @@ class AppToast {
     BuildContext context, {
     required String message,
   }) {
-    return show(context,
-        message: message,
-        color: context.colorScheme.error,
-        leading: const Icon(Icons.warning));
+    return show(
+      context,
+      message: message,
+      color: context.colorScheme.error,
+      foregroundColor: context.colorScheme.onError,
+      leading: const Icon(Icons.warning),
+    );
   }
 
   static void show(
     BuildContext context, {
     required String message,
     required Color color,
+    required Color foregroundColor,
     required Widget leading,
   }) {
     final toast = FToast()
       ..init(context)
       ..removeCustomToast();
 
-    final foregroundColor = context.colorScheme.onPrimary;
     toast.showToast(
       isDismissable: false,
       toastDuration: const Duration(seconds: 3),

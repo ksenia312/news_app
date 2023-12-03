@@ -10,11 +10,11 @@ abstract class AppThemeConfig {
   );
 
   static ThemeData get lightTheme => ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
+        colorScheme: const ColorScheme.light(
+          primary: Colors.blue,
           brightness: Brightness.light,
+          tertiary: Color(0xff0d4b80),
         ),
-        splashColor: const Color(0xff0d4b80),
         appBarTheme: appBarTheme.copyWith(
           color: Colors.white,
           iconTheme: const IconThemeData(
@@ -25,13 +25,13 @@ abstract class AppThemeConfig {
       );
 
   static ThemeData get darkTheme => ThemeData(
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-          accentColor: Colors.lightBlueAccent,
+        colorScheme: const ColorScheme.dark(
+          primary: Colors.blue,
+          secondary: Colors.lightBlueAccent,
           brightness: Brightness.dark,
+          surface: Color(0xff444446),
+          tertiary: Color(0xff444446),
         ),
-        splashColor: const Color(0xff444446),
-        appBarTheme: appBarTheme,
         inputDecorationTheme: inputDecorationTheme,
       );
 }

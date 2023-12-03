@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'app_config.dart';
 
 abstract class DioRegister {
@@ -10,7 +11,11 @@ abstract class DioRegister {
     );
 
     instance.interceptors.add(const DioAuthInterceptor());
-    instance.interceptors.add(LogInterceptor());
+    if (kDebugMode) {
+      instance.interceptors.add(
+        LogInterceptor(requestBody: true),
+      );
+    }
 
     return instance;
   }
