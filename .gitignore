@@ -50,3 +50,6 @@ app.*.map.json
 pubspec.lock
 
 */Podfile.lock
+
+# FVM Version Cache
+.fvm/
