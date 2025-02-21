@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/app/models/async_state.dart';
-import 'package:news_app/app/models/article_entity.dart';
-import 'package:news_app/app/models/news_search_params.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:news_app/app/models/article_entity.dart';
+import 'package:news_app/app/models/async_state.dart';
+import 'package:news_app/app/models/news_search_params.dart';
 import 'package:news_app/app/models/source_entity.dart';
 
 import 'interface/news_repository.dart';
@@ -20,7 +20,6 @@ class NewsCubit extends Cubit<NewsState> {
 
   Future<void> init({required List<SourceEntity> sources}) async {
     _setUpSources(sources: sources);
-    return _fetch();
   }
 
   Future<void> fetchNext() {
@@ -71,11 +70,7 @@ class NewsCubit extends Cubit<NewsState> {
     }
   }
 
-  Future<void> _fetch({
-    int? page,
-    int? pageCount,
-    NewsSearchParams? searchParams,
-  }) async {
+  Future<void> _fetch({int? page}) async {
     if (state.articles?.inProgress ?? false) return;
     if (state.isCompleted) return;
     emit(
@@ -85,9 +80,9 @@ class NewsCubit extends Cubit<NewsState> {
         ),
       ),
     );
-    final requireSearchParams = searchParams ?? state.searchParams;
+    final requireSearchParams = state.searchParams;
     final requirePage = page ?? state.currentPage;
-    final requirePageCount = pageCount ?? state.pageCount;
+    final requirePageCount = state.pageCount;
 
     try {
       final data = await repository.fetch(

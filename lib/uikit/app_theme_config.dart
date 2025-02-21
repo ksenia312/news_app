@@ -33,6 +33,7 @@ abstract class AppThemeConfig {
           brightness: Brightness.dark,
           surface: Color(0xff444446),
           tertiary: Color(0xff444446),
+          onPrimary: Colors.white,
         ),
         inputDecorationTheme: inputDecorationTheme,
       );

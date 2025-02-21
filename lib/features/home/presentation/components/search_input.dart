@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/common/extensions/context_extension.dart';
 import 'package:news_app/features/home/domain/news_cubit.dart';
 import 'package:news_app/uikit/app_icon_button.dart';
 import 'package:news_app/uikit/app_icons.dart';
@@ -24,6 +25,9 @@ class _HomeSearchInputState extends State<HomeSearchInput> {
 
   @override
   Widget build(BuildContext context) {
+    final border = OutlineInputBorder(
+      borderSide: BorderSide(color: context.colorScheme.onSurface),
+    );
     return TextField(
       controller: _controller,
       focusNode: _focusNode,
@@ -31,8 +35,8 @@ class _HomeSearchInputState extends State<HomeSearchInput> {
       onSubmitted: _search,
       decoration: InputDecoration(
         hintText: 'Search',
-        border: const OutlineInputBorder(),
-        enabledBorder: const OutlineInputBorder(),
+        border: border,
+        enabledBorder: border,
         contentPadding: const EdgeInsets.symmetric(horizontal: 8),
         prefixIcon: _buildPrefixIcon(),
         suffixIcon: _buildSuffixIcon(),
