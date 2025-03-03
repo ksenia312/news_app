@@ -64,10 +64,7 @@ class ArticleScreen extends StatelessWidget {
 
   Widget _buildImage(BuildContext context) {
     final child = entity.imageUrl != null
-        ? Hero(
-            tag: AppHeroTags.articleImage.tagBy('${entity.id}'),
-            child: AppImage(url: entity.imageUrl!),
-          )
+        ? AppImage(url: entity.imageUrl!)
         : const SizedBox.shrink();
 
     return LimitedBox(
